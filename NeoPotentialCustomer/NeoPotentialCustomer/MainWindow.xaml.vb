@@ -3,6 +3,9 @@
 Class MainWindow
     Dim db As New Database
 
+    Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
+        gridPotentialCustomers.ItemsSource = New DataGridCollectionView(db.PotentialCustomers.ToArray)
+    End Sub
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
         db.Database.CreateIfNotExists()
 
@@ -30,31 +33,8 @@ Class MainWindow
         db.SaveChanges()
     End Sub
 
-    Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
-        Dim Customers = db.PotentialCustomers.Where(Function(x) x.Name IsNot Nothing AndAlso x.Name <> "").Take(100)
-
-        Dim collectionView As New DataGridCollectionView(Customers.ToArray)
-        'collectionView.GroupDescriptions.Add(New DataGridGroupDescription("Name"))
-        'collectionView.GroupDescriptions.Add(New DataGridGroupDescription("City"))
-        gridPotentialCustomers.ItemsSource = collectionView
-
-        'gridPotentialCustomers.group()
-
-
-        'For Each Customer In Customers.ToArray
-        '    gridPotentialCustomers.Items.Add(Customer)
-        'Next
-
-
-
-
-    End Sub
-
-    Private Sub Button_Click_2(sender As Object, e As RoutedEventArgs)
-        pgridSelectedRow.SelectedObject = New With {.Name = "Aaron Campf", .Age = 26}
-    End Sub
-
-    Private Sub gridPotentialCustomers_CurrentChanging(sender As Object, e As DataGridCurrentChangingEventArgs) Handles gridPotentialCustomers.CurrentChanging
+    Private Sub gridPotentialCustomers_CurrentChanged(sender As Object, e As DataGridCurrentChangedEventArgs) Handles gridPotentialCustomers.CurrentChanged
         pgridSelectedRow.SelectedObject = e.NewCurrent
     End Sub
+
 End Class
