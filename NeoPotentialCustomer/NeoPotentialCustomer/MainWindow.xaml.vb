@@ -6,7 +6,9 @@ Class MainWindow
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         gridPotentialCustomers.ItemsSource = New DataGridCollectionView(db.PotentialCustomers.ToArray)
     End Sub
+
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+        Exit Sub
         db.Database.CreateIfNotExists()
 
         Dim Data = XElement.Load("C:\Users\acampf\Documents\GitHub\NeoPotentialCustomer\Original\CallCust.xml")
@@ -37,4 +39,8 @@ Class MainWindow
         pgridSelectedRow.SelectedObject = e.NewCurrent
     End Sub
 
+    Private Sub btnEditPotentialCustomers_Click(sender As Object, e As RoutedEventArgs) Handles btnEditPotentialCustomers.Click
+        Dim Form As New EditPotentialCustomers
+        Form.ShowDialog()
+    End Sub
 End Class
