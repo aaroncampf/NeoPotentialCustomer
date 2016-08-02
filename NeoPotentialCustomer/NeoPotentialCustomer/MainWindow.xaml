@@ -23,7 +23,12 @@
         <xcdg:DataGridControl x:Name="gridPotentialCustomers" ReadOnly="True" Margin="0,37,349,0">
             <xcdg:DataGridControl.Columns>
                 <xcdg:Column FieldName="Name" Title="Name" IsMainColumn="True"/>
-                <xcdg:Column FieldName="City" Title="City"></xcdg:Column>
+                <xcdg:Column FieldName="Address" Title="Address" />
+                <xcdg:Column FieldName="City" Title="City" />
+                <xcdg:Column FieldName="Zip" Title="Zip" />
+                <xcdg:Column FieldName="Type" Title="Type" />
+                <xcdg:Column FieldName="Contacted" Title="Contacted" />
+                <xcdg:Column FieldName="Interested" Title="Interested" />
             </xcdg:DataGridControl.Columns>
 
         </xcdg:DataGridControl>
