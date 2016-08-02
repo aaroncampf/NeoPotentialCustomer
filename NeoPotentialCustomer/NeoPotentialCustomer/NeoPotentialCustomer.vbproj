@@ -129,6 +129,7 @@
     <Compile Include="EditPotentialCustomers.xaml.vb">
       <DependentUpon>EditPotentialCustomers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IsNothingConverter.vb" />
     <Compile Include="MainWindow.xaml.vb">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

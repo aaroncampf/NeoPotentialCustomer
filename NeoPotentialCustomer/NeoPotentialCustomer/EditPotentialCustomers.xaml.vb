@@ -19,7 +19,13 @@
     End Sub
 
     Private Sub btnCreatePotentialCustomer_Click(sender As Object, e As RoutedEventArgs) Handles btnCreatePotentialCustomer.Click
-        gbxPotentialCustomer.DataContext = New PotentialCustomer
+        'gbxPotentialCustomer.DataContext = New PotentialCustomer
+
+        Dim New_PotentialCustomer As New PotentialCustomer
+        db.PotentialCustomers.Add(New_PotentialCustomer)
+        cbxPotentialCustomers.Items.Add(New_PotentialCustomer)
+
+
         txtName.Focus()
     End Sub
 
