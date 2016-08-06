@@ -33,5 +33,6 @@
 			</xctk:PropertyGrid.PropertyDefinitions>-->
 		</xctk:PropertyGrid>
         <Button x:Name="btnEditPotentialCustomers" Content="Edit Potential Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="145"/>
-    </Grid>
+		<Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="438,10,0,0" VerticalAlignment="Top" Width="75"/>
+	</Grid>
 </Window>
