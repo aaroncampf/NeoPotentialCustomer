@@ -59,5 +59,14 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to a_hWEmajHdoAAAAAAAABMTd3LWyyaQDW2fqnusoKM32LEHVsYYQjbQjf68jtEcSN.
+        '''</summary>
+        Friend ReadOnly Property API_Key() As String
+            Get
+                Return ResourceManager.GetString("API_Key", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

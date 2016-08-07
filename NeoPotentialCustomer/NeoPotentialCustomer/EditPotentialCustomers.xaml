@@ -9,9 +9,9 @@
     </Window.Resources>
 
     <Grid>
-        <Button Content="Upload Data" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" />
+        <Button x:Name="btnUploadData" Content="Upload Data" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" />
         <Button x:Name="btnCreatePotentialCustomer" Content="Create" HorizontalAlignment="Left" Margin="243,73,0,0" VerticalAlignment="Top" Width="75"/>
-        <ComboBox x:Name="cbxPotentialCustomers" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="228" DisplayMemberPath="Name"/>
+        <ComboBox x:Name="cbxPotentialCustomers" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="228" DisplayMemberPath="Name" IsEditable="True"/>
         <GroupBox x:Name="gbxPotentialCustomer" Header="PotentialCustomer" Margin="14,100,10,10" IsEnabled="{Binding SelectedItem, ElementName=cbxPotentialCustomers, Converter={StaticResource IsNothingConverter}}">
             <Grid Margin="2,0,-2,0">
                 <Button Content="Save" Margin="0,256,0,0" />

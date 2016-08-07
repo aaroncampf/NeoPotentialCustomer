@@ -1,6 +1,4 @@
-﻿Imports System.Threading.Tasks
-Imports Microsoft.OneDrive.Sdk
-Imports Xceed.Wpf.DataGrid
+﻿Imports Xceed.Wpf.DataGrid
 
 'NO ---To Get Token: https://dev.onedrive.com/auth/msa_oauth.htm => Press [Get Token] Button
 
@@ -12,10 +10,9 @@ Class MainWindow
 	End Sub
 
 	Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-		Exit Sub
 		db.Database.CreateIfNotExists()
 
-		Dim Data = XElement.Load("C:\Users\acampf\Documents\GitHub\NeoPotentialCustomer\Original\CallCust.xml")
+		Dim Data = XElement.Load("C:\Users\aaron\Documents\GitHub\NeoPotentialCustomer\Original\CallCust.xml")
 
 		For Each Customer In Data.<Cust>
 			db.PotentialCustomers.Add(New PotentialCustomer With {
@@ -28,9 +25,7 @@ Class MainWindow
 										.Type = Customer.@Type,
 										.Email = Customer.@Email,
 										.Details = Customer.@Details
-			}
-			)
-
+			})
 
 			'.Interested = Boolean.Parse(Customer.@Interested),
 			'.Contacted = Boolean.Parse(Customer.@Contacted)
@@ -46,24 +41,27 @@ Class MainWindow
 	Private Sub btnEditPotentialCustomers_Click(sender As Object, e As RoutedEventArgs) Handles btnEditPotentialCustomers.Click
 		Dim Form As New EditPotentialCustomers
 		Form.ShowDialog()
+		gridPotentialCustomers.ItemsSource = New DataGridCollectionView(db.PotentialCustomers.ToArray)
 	End Sub
 
-	Private Sub button_Click_1(sender As Object, e As RoutedEventArgs) Handles button.Click
-		Dim Client = Microsoft.OneDrive.Sdk.OneDriveClient.GetMicrosoftAccountClient(
-			"51c470c8-7391-441d-8e53-9df884072802", "https://login.live.com/oauth20_desktop.srf", {"onedrive.readwrite"},
-			webAuthenticationUi:=New FormsWebAuthenticationUi()
-		)
 
-		Client.AuthenticateAsync()
+	Private Sub btnUpdate_Click(sender As Object, e As RoutedEventArgs) Handles btnUpdate.Click
+		If Not My.Computer.Network.IsAvailable Then
+			MsgBox("No Internet")
+			Exit Sub
+		End If
 
+		db.Dispose()
+
+		Dim Dropbox = New Dropbox.Api.DropboxClient(My.Resources.API_Key)
+		Dim Test = Dropbox.Files.DownloadAsync("/Storage/PotentialCustomers.sdf")
+
+
+		Dim Path = If(AppDomain.CurrentDomain.GetData("DataDirectory") Is Nothing, "", AppDomain.CurrentDomain.GetData("DataDirectory") & "\") & "PotentialCustomers.sdf"
+		My.Computer.FileSystem.WriteAllBytes(Path, Test.Result.GetContentAsByteArrayAsync().Result, False)
+
+
+		db = New Database
+		gridPotentialCustomers.ItemsSource = New DataGridCollectionView(db.PotentialCustomers.ToArray)
 	End Sub
-End Class
-
-
-Public Class FormsWebAuthenticationUi
-	Implements Microsoft.OneDrive.Sdk.IWebAuthenticationUi
-
-	Public Function AuthenticateAsync(requestUri As Uri, callbackUri As Uri) As Task(Of IDictionary(Of String, String)) Implements IWebAuthenticationUi.AuthenticateAsync
-		Throw New NotImplementedException()
-	End Function
 End Class
