@@ -1,6 +1,10 @@
 ﻿Imports System.Globalization
 
 
+''' <summary>
+''' Checks to see if a value is null
+''' </summary>
+''' <remarks></remarks>
 Public Class IsNothingConverter
     Implements IValueConverter
 

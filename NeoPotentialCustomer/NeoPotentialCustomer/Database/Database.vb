@@ -19,7 +19,7 @@ Public Class Database
     ' on configuring and using a Code First model, see http:'go.microsoft.com/fwlink/?LinkId=390109.
     ' Public Overridable Property MyEntities() As DbSet(Of MyEntity)
 
-
+    ''' <summary>The potential customers from the database</summary> 
     Public Overridable Property PotentialCustomers() As DbSet(Of PotentialCustomer)
 End Class
 
