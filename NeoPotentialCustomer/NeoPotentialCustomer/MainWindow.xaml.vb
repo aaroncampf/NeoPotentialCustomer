@@ -6,7 +6,15 @@ Class MainWindow
 	Dim db As New Database
 
 	Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-		gridPotentialCustomers.ItemsSource = New DataGridCollectionView(db.PotentialCustomers.ToArray)
+		Try
+			If db.Database.Exists Then
+				gridPotentialCustomers.ItemsSource = New DataGridCollectionView(db.PotentialCustomers.ToArray)
+			End If
+		Catch ex As Exception
+			MsgBox(ex.ToString)
+		End Try
+
+
 	End Sub
 
 	Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
