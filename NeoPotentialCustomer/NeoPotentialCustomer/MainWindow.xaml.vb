@@ -72,4 +72,9 @@ Class MainWindow
 		db = New Database
 		gridPotentialCustomers.ItemsSource = New DataGridCollectionView(db.PotentialCustomers.ToArray)
 	End Sub
+
+	Private Sub button_Click_1(sender As Object, e As RoutedEventArgs) Handles button.Click
+		Dim Types = db.PotentialCustomers.Select(Function(x) x.Type).Distinct.ToList
+		Dim Text As String = String.Join(vbCrLf, Types)
+	End Sub
 End Class
